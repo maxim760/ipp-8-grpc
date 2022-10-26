@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+service ProductsService {
+    rpc GetAll (Empty) returns (AllListItems) {}
+    rpc GetById (ListItemId) returns (ListItem) {}
+    rpc InsertProduct (Product) returns (Product) {}
+    rpc InsertList (ListItem) returns (ListItem) {}
+    rpc UpdateProduct (Product) returns (Product) {}
+    rpc UpdateList (ListItemUpdate) returns (ListItem) {}
+    rpc RemoveProduct (ProductId) returns (Empty) {}
+    rpc RemoveList (ListItemId) returns (Empty) {}
+}
+
+message Empty {}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    bool checked = 3;
+    string listId = 4;
+    string count = 5;
+}
+
+message ProductId {
+  string id = 1;
+  string listId = 2;
+}
+
+message ListItemUpdate {
+  string id = 1;
+  string username = 2;
+  string comment = 3;
+}
+
+message ListItem {
+  string id = 1;
+  string username = 2;
+  string comment = 3;
+  repeated Product products = 4;
+}
+
+message ListItemId {
+    string id = 1;
+}
+
+message AllListItems {
+  repeated ListItem allLists = 1;
+}
